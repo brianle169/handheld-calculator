@@ -3,7 +3,7 @@
 
 /* Red border for debugging and styling */
 * {
-   border: 2px solid red;
+   /* border: 2px solid red; */
    box-sizing: border-box;
 }
 
@@ -26,9 +26,53 @@ body {
 
 .body-container > .calculator-frame {
    display: flex;
+   flex-direction: column;
    width: 450px;
-   height: 550px;
-   border: 5px solid rgb(212, 164, 246);
-   border-radius: 5%;
+   height: 650px;
+   border: 2px solid rgb(212, 164, 246);
+   border-radius: 10px;
    background-color: rgb(220, 255, 255);
+   padding: 20px;
+   row-gap: 20px;
+   box-shadow: 7px 9px 2px 0px rgba(165, 165, 165, 0.51);
+}
+
+.calculator-frame > .display-panel {
+   display: flex;
+   flex-direction: column;
+   height: 110px;
+   background-color: cadetblue;
+   border-radius: 5px;
+   border: 2px solid black;
+}
+
+.display-panel > #upper-panel {
+   flex: 1;
+   display: flex;
+   font-size: 30px;
+   padding: 5px 10px 0px 0px;
+   font-style: italic;
+   justify-content: flex-end;
+   align-items: center;
+}
+
+.display-panel > #lower-panel {
+   flex: 2;
+   display: flex;
+   font-size: 70px;
+   justify-content: flex-end;
+   align-items: center;
+   padding: 5px 10px 5px 0px;
+}
+
+.display-panel,
+.buttons-panel > .calculation-buttons > .numeric {
+   font-family: "Pocket Calculator", sans-serif;
+}
+
+.buttons-panel {
+   flex: 1;
+   display: flex;
+   flex-direction: column;
+   row-gap: 20px;
 }
