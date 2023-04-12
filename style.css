@@ -55,6 +55,7 @@ body {
    font-style: italic;
    justify-content: flex-end;
    align-items: center;
+   overflow: hidden;
 }
 
 .display-panel > #lower-panel {
@@ -87,7 +88,7 @@ body {
    border-radius: 10px;
    background-color: rgb(255, 156, 156);
    border: 2px solid #000000;
-   box-shadow: 3px 3px 2px 0px rgba(165, 165, 165, 0.51);
+   box-shadow: 3px 3px 2px 0px rgba(81, 80, 80, 0.51);
 }
 
 .buttons-panel > .calculation-buttons {
@@ -106,7 +107,7 @@ body {
    min-width: 90px;
    border-radius: 10px;
    border: 2px solid #000000;
-   box-shadow: 3px 3px 2px 0px rgba(165, 165, 165, 0.51);
+   box-shadow: 3px 3px 2px 0px rgba(81, 80, 80, 0.51);
 }
 
 .button:hover {
