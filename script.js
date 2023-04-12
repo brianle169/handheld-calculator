@@ -41,9 +41,10 @@ c.onclick = () => {
 };
 
 del.onclick = () => {
-   //delete one character
-   setUpperDisplay(upperPanel.textContent.slice(0, -1));
-   userInput = userInput.slice(0, -1);
+   let currentDisplay = input.join(" ");
+   currentDisplay = currentDisplay.slice(0, -1);
+   setUpperDisplay(currentDisplay);
+   input = currentDisplay.split(" ");
 };
 
 evaluate.onclick = () => calculate();
@@ -55,21 +56,6 @@ function calculate() {
    }
    setResultDisplay(result);
    return result;
-}
-
-function separateInput(string) {
-   let arr = string.split(" ");
-   return arr.map((item) => {
-      if (arr.indexOf(item) !== 1) return +item; //Convert to number, except operator
-      return item;
-   });
-}
-
-function validInput(string) {
-   let arr = string.split(" ");
-   if (arr[arr.length - 1] == 0) return false; //last eleement is not a number
-   if (arr.length > 3) return false;
-   return true;
 }
 
 function setUpperDisplay(content) {
@@ -84,12 +70,12 @@ function addNumericButtonsListener(buttons) {
    buttons.forEach((button) =>
       button.addEventListener("click", () => {
          //If no operator is chosen
-         if (input[1] === "") {
+         if (input.length === 1 || input[1] === "") {
             input[0] += button.textContent;
-            upperPanel.textContent = input[0];
+            setUpperDisplay(input[0]);
          } else {
             input[2] += button.textContent;
-            upperPanel.textContent = input[0] + " " + input[1] + " " + input[2];
+            setUpperDisplay(input[0] + " " + input[1] + " " + input[2]);
          }
          console.log(input);
       })
@@ -105,8 +91,7 @@ function addOperatorButtonsListener(buttons) {
             input[1] = button.textContent;
          }
          input[1] = button.textContent;
-         upperPanel.textContent = input[0] + " " + input[1] + " ";
-         console.log(input);
+         setUpperDisplay(input[0] + " " + input[1] + " ");
       })
    );
 }
@@ -130,14 +115,6 @@ function divide(num1, num2) {
    return num1 / num2;
 }
 
-function modulus(num1, num2) {
-   return num1 % num2;
-}
-
-function power(num, pow) {
-   return Math.pow(num, pow);
-}
-
 function operate(num1, ops, num2) {
    switch (ops) {
       case "+":
@@ -151,11 +128,5 @@ function operate(num1, ops, num2) {
 
       case "÷":
          return divide(num1, num2);
-
-      case "%":
-         return modulus(num1, num2);
-
-      case "^":
-         return power(num1, num2);
    }
 }
