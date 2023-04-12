@@ -1,8 +1,9 @@
 /* Components */
-const buttons = Array.from(
-   document.querySelectorAll(
-      ".calculation-buttons > .button.numeric, .calculation-buttons > .button.operator"
-   )
+const numericButtons = Array.from(
+   document.querySelectorAll(".calculation-buttons > .button.numeric")
+);
+const operatorButtons = Array.from(
+   document.querySelectorAll(".calculation-buttons > .button.operator")
 );
 const displayPanel = document.getElementById("display-panel");
 const upperPanel = document.getElementById("upper-panel");
@@ -14,46 +15,50 @@ const evaluate = document.getElementById("evaluate"); //equals sign
 
 /* Variables */
 let userInput = "";
-let result = 0.0;
+let input = [, ,];
+let result = null;
 
 /* DEFAULT VALUES */
 const DEFAULT_UPPER_PANEL_VALUE = "";
 const DEFAULT_LOWER_PANEL_VALUE = "";
 const DEFAULT_USER_INPUT = "";
-const DEFAULT_RESULT = 0.0;
+const DEFAULT_RESULT = null;
 
 /* Functions */
 
 ac.onclick = () => {
    //set upper-panel to default values onclick
-   upperPanel.textContent = DEFAULT_UPPER_PANEL_VALUE;
-   lowerPanel.textContent = DEFAULT_LOWER_PANEL_VALUE;
+   setUpperDisplay(DEFAULT_UPPER_PANEL_VALUE);
+   setResultDisplay(DEFAULT_LOWER_PANEL_VALUE);
    userInput = DEFAULT_USER_INPUT;
    result = DEFAULT_RESULT;
 };
 
 c.onclick = () => {
    //same with ac
-   upperPanel.textContent = DEFAULT_UPPER_PANEL_VALUE;
+   setUpperDisplay(DEFAULT_UPPER_PANEL_VALUE);
    userInput = DEFAULT_USER_INPUT;
 };
 
 del.onclick = () => {
    //delete one character
-   upperPanel.textContent = upperPanel.textContent.slice(0, -1);
+   setUpperDisplay(upperPanel.textContent.slice(0, -1));
    userInput = userInput.slice(0, -1);
 };
 
-evaluate.onclick = () => {
-   if (validInput(userInput)) {
+evaluate.onclick = () => calculate();
+
+function calculate() {
+   if (validInput(upperPanel.textContent)) {
       let [num1, ops, num2] = separateInput(userInput);
       if (ops === undefined && num2 === undefined) result = num1;
       else {
          result = operate(num1, ops, num2);
       }
-      lowerPanel.textContent = result;
-   } else lowerPanel.textContent = "Error";
-};
+      setResultDisplay(result);
+      userInput = result;
+   }
+}
 
 function separateInput(string) {
    let arr = string.split(" ");
@@ -65,27 +70,43 @@ function separateInput(string) {
 
 function validInput(string) {
    let arr = string.split(" ");
-   if (isNaN(arr[arr.length - 1])) return false; //last eleement is not a number
+   if (arr[arr.length - 1] == 0) return false; //last eleement is not a number
    if (arr.length > 3) return false;
    return true;
 }
 
-function addAllButtonsListener(buttons) {
+function setUpperDisplay(content) {
+   upperPanel.textContent = content;
+}
+
+function setResultDisplay(content) {
+   lowerPanel.textContent = content;
+}
+
+function addNumericButtonsListener(buttons) {
    buttons.forEach((button) =>
       button.addEventListener("click", () => {
-         if (button.classList.contains("operator")) {
-            upperPanel.textContent += ` ${button.textContent} `;
-            userInput += ` ${button.textContent} `;
-            return;
-         }
          upperPanel.textContent += button.textContent;
          userInput += button.textContent;
-
          console.log(userInput);
       })
    );
 }
-addAllButtonsListener(buttons);
+
+function addOperatorButtonsListener(buttons) {
+   buttons.forEach((button) =>
+      button.addEventListener("click", () => {
+         calculate();
+         setUpperDisplay(userInput); //get result & display upper + lower
+         upperPanel.textContent += ` ${button.textContent} `;
+         userInput += ` ${button.textContent} `;
+         console.log(userInput);
+      })
+   );
+}
+
+addNumericButtonsListener(numericButtons);
+addOperatorButtonsListener(operatorButtons);
 
 function add(num1, num2) {
    return num1 + num2;
