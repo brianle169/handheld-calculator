@@ -8,7 +8,7 @@
 }
 
 html {
-   background-color: rgb(242, 240, 240);
+   background-color: rgb(240, 245, 169);
 }
 
 body {
@@ -31,7 +31,7 @@ body {
    height: 600px;
    border: 2px solid #000000;
    border-radius: 10px;
-   background-color: rgb(220, 255, 255);
+   background-color: rgb(250, 215, 120);
    padding: 20px;
    row-gap: 20px;
    box-shadow: 7px 9px 2px 0px rgba(165, 165, 165, 0.51);
@@ -41,7 +41,7 @@ body {
    display: flex;
    flex-direction: column;
    height: 110px;
-   background-color: cadetblue;
+   background-color: rgb(121, 186, 189);
    border-radius: 5px;
    border: 2px solid black;
    font-family: "Pocket Calculator", sans-serif;
@@ -51,7 +51,7 @@ body {
    flex: 1;
    display: flex;
    font-size: 30px;
-   padding: 5px 10px 0px 0px;
+   padding: 5px 10px 0px 10px;
    font-style: italic;
    justify-content: flex-end;
    align-items: center;
@@ -64,7 +64,8 @@ body {
    font-size: 70px;
    justify-content: flex-end;
    align-items: center;
-   padding: 5px 10px 5px 0px;
+   padding: 5px 10px 5px 10px;
+   overflow: hidden;
 }
 
 .buttons-panel {
