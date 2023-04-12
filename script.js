@@ -5,8 +5,6 @@ const numericButtons = Array.from(
 const operatorButtons = Array.from(
    document.querySelectorAll(".calculation-buttons > .button.operator")
 );
-const decimalButton = document.getElementsByClassName("decimal");
-const displayPanel = document.getElementById("display-panel");
 const upperPanel = document.getElementById("upper-panel");
 const lowerPanel = document.getElementById("lower-panel");
 const ac = document.getElementById("clear-all");
@@ -25,7 +23,6 @@ const DEFAULT_INPUT = ["", "", ""];
 const DEFAULT_RESULT = null;
 
 /* Functions */
-
 ac.onclick = () => {
    //set upper-panel to default values onclick
    setUpperDisplay(DEFAULT_UPPER_PANEL_VALUE);
@@ -104,18 +101,30 @@ addNumericButtonsListener(numericButtons);
 addOperatorButtonsListener(operatorButtons);
 
 function add(num1, num2) {
+   if (num1 % 1 != 0 || num2 % 1 != 0) {
+      return (10 * num1 + 10 * num2) / 10;
+   }
    return num1 + num2;
 }
 
 function subtract(num1, num2) {
+   if (num1 % 1 != 0 || num2 % 1 != 0) {
+      return (10 * num1 - 10 * num2) / 10;
+   }
    return num1 - num2;
 }
 
 function multiply(num1, num2) {
+   if (num1 % 1 != 0 || num2 % 1 != 0) {
+      return (10 * num1 * (10 * num2)) / 100;
+   }
    return num1 * num2;
 }
 
 function divide(num1, num2) {
+   if (num1 % 1 != 0 || num2 % 1 != 0) {
+      return (10 * num1) / (10 * num2);
+   }
    return num1 / num2;
 }
 
