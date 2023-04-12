@@ -110,7 +110,14 @@ body {
    box-shadow: 3px 3px 2px 0px rgba(81, 80, 80, 0.51);
 }
 
-.button:hover {
+.display-buttons > *:is(:hover) {
    transition: all 0.05s;
+   background-color: rgb(164, 121, 121);
+   box-shadow: none;
+}
+
+.calculation-buttons > *:is(:hover) {
+   transition: all 0.05s;
+   background-color: rgb(132, 132, 132);
    box-shadow: none;
 }
