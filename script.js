@@ -50,7 +50,7 @@ del.onclick = () => {
 evaluate.onclick = () => calculate();
 
 function calculate() {
-   if (input[1] === undefined && input[2] === undefined) result = input[0];
+   if (input[1] === "" && input[2] === "") result = input[0];
    else {
       result = operate(+input[0], input[1], +input[2]);
    }
