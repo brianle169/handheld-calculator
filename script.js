@@ -21,7 +21,7 @@ let result = null;
 /* DEFAULT VALUES */
 const DEFAULT_UPPER_PANEL_VALUE = "";
 const DEFAULT_LOWER_PANEL_VALUE = "";
-const DEFAULT_USER_INPUT = "";
+const DEFAULT_INPUT = ["", "", ""];
 const DEFAULT_RESULT = null;
 
 /* Functions */
@@ -47,7 +47,10 @@ del.onclick = () => {
    input = currentDisplay.split(" ");
 };
 
-evaluate.onclick = () => calculate();
+evaluate.onclick = () => {
+   calculate();
+   input = ["", "", ""];
+};
 
 function calculate() {
    if (input[1] === "" && input[2] === "") result = input[0];
@@ -77,7 +80,6 @@ function addNumericButtonsListener(buttons) {
             input[2] += button.textContent;
             setUpperDisplay(input[0] + " " + input[1] + " " + input[2]);
          }
-         console.log(input);
       })
    );
 }
@@ -86,9 +88,12 @@ function addOperatorButtonsListener(buttons) {
    buttons.forEach((button) =>
       button.addEventListener("click", () => {
          if (!input.includes("")) {
-            input[0] = calculate();
+            calculate();
+            input[0] = result;
             input[2] = "";
             input[1] = button.textContent;
+         } else if (input[0] === "" && result !== null) {
+            input[0] = result;
          }
          input[1] = button.textContent;
          setUpperDisplay(input[0] + " " + input[1] + " ");
