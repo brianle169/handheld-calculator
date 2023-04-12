@@ -58,7 +58,6 @@ function calculate() {
       result = operate(+input[0], input[1], +input[2]);
    }
    setResultDisplay(result);
-   return result;
 }
 
 function setUpperDisplay(content) {
