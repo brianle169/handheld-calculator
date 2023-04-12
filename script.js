@@ -5,6 +5,9 @@ const numericButtons = Array.from(
 const operatorButtons = Array.from(
    document.querySelectorAll(".calculation-buttons > .button.operator")
 );
+const decimal = document.querySelector(
+   "#calculation-buttons > button.button.numeric.decimal"
+);
 const upperPanel = document.getElementById("upper-panel");
 const lowerPanel = document.getElementById("lower-panel");
 const ac = document.getElementById("clear-all");
@@ -68,11 +71,18 @@ function setResultDisplay(content) {
 function addNumericButtonsListener(buttons) {
    buttons.forEach((button) =>
       button.addEventListener("click", () => {
+         decimal.disabled = false;
          //If no operator is chosen
          if (input.length === 1 || input[1] === "") {
+            if (input[0].includes(".")) {
+               decimal.disabled = true;
+            }
             input[0] += button.textContent;
             setUpperDisplay(input[0]);
          } else {
+            if (input[2].includes(".")) {
+               decimal.disabled = true;
+            }
             input[2] += button.textContent;
             setUpperDisplay(input[0] + " " + input[1] + " " + input[2]);
          }

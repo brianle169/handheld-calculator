@@ -121,3 +121,8 @@ body {
    background-color: rgb(132, 132, 132);
    box-shadow: none;
 }
+
+#calculation-buttons > button.button.numeric.decimal:disabled {
+   box-shadow: none;
+   background-color: rgb(242, 240, 240);
+}
