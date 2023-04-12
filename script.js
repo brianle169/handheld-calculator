@@ -32,12 +32,14 @@ ac.onclick = () => {
    setResultDisplay(DEFAULT_LOWER_PANEL_VALUE);
    input = ["", "", ""];
    result = DEFAULT_RESULT;
+   decimal.disabled = false;
 };
 
 c.onclick = () => {
    //same with ac
    setUpperDisplay(DEFAULT_UPPER_PANEL_VALUE);
    input = ["", "", ""];
+   decimal.disabled = false;
 };
 
 del.onclick = () => {
@@ -50,6 +52,7 @@ del.onclick = () => {
 evaluate.onclick = () => {
    calculate();
    input = ["", "", ""];
+   decimal.disabled = false;
 };
 
 function calculate() {
@@ -71,7 +74,6 @@ function setResultDisplay(content) {
 function addNumericButtonsListener(buttons) {
    buttons.forEach((button) =>
       button.addEventListener("click", () => {
-         decimal.disabled = false;
          //If no operator is chosen
          if (input.length === 1 || input[1] === "") {
             if (input[0].includes(".")) {
@@ -93,6 +95,7 @@ function addNumericButtonsListener(buttons) {
 function addOperatorButtonsListener(buttons) {
    buttons.forEach((button) =>
       button.addEventListener("click", () => {
+         decimal.disabled = false;
          if (!input.includes("")) {
             calculate();
             input[0] = result;
