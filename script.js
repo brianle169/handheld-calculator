@@ -5,6 +5,7 @@ const numericButtons = Array.from(
 const operatorButtons = Array.from(
    document.querySelectorAll(".calculation-buttons > .button.operator")
 );
+const decimalButton = document.getElementsByClassName("decimal");
 const displayPanel = document.getElementById("display-panel");
 const upperPanel = document.getElementById("upper-panel");
 const lowerPanel = document.getElementById("lower-panel");
@@ -14,8 +15,7 @@ const del = document.getElementById("delete");
 const evaluate = document.getElementById("evaluate"); //equals sign
 
 /* Variables */
-let userInput = "";
-let input = [, ,];
+let input = ["", "", ""];
 let result = null;
 
 /* DEFAULT VALUES */
@@ -30,14 +30,14 @@ ac.onclick = () => {
    //set upper-panel to default values onclick
    setUpperDisplay(DEFAULT_UPPER_PANEL_VALUE);
    setResultDisplay(DEFAULT_LOWER_PANEL_VALUE);
-   userInput = DEFAULT_USER_INPUT;
+   input = ["", "", ""];
    result = DEFAULT_RESULT;
 };
 
 c.onclick = () => {
    //same with ac
    setUpperDisplay(DEFAULT_UPPER_PANEL_VALUE);
-   userInput = DEFAULT_USER_INPUT;
+   input = ["", "", ""];
 };
 
 del.onclick = () => {
@@ -49,15 +49,12 @@ del.onclick = () => {
 evaluate.onclick = () => calculate();
 
 function calculate() {
-   if (validInput(upperPanel.textContent)) {
-      let [num1, ops, num2] = separateInput(userInput);
-      if (ops === undefined && num2 === undefined) result = num1;
-      else {
-         result = operate(num1, ops, num2);
-      }
-      setResultDisplay(result);
-      userInput = result;
+   if (input[1] === undefined && input[2] === undefined) result = input[0];
+   else {
+      result = operate(+input[0], input[1], +input[2]);
    }
+   setResultDisplay(result);
+   return result;
 }
 
 function separateInput(string) {
@@ -86,9 +83,15 @@ function setResultDisplay(content) {
 function addNumericButtonsListener(buttons) {
    buttons.forEach((button) =>
       button.addEventListener("click", () => {
-         upperPanel.textContent += button.textContent;
-         userInput += button.textContent;
-         console.log(userInput);
+         //If no operator is chosen
+         if (input[1] === "") {
+            input[0] += button.textContent;
+            upperPanel.textContent = input[0];
+         } else {
+            input[2] += button.textContent;
+            upperPanel.textContent = input[0] + " " + input[1] + " " + input[2];
+         }
+         console.log(input);
       })
    );
 }
@@ -96,11 +99,14 @@ function addNumericButtonsListener(buttons) {
 function addOperatorButtonsListener(buttons) {
    buttons.forEach((button) =>
       button.addEventListener("click", () => {
-         calculate();
-         setUpperDisplay(userInput); //get result & display upper + lower
-         upperPanel.textContent += ` ${button.textContent} `;
-         userInput += ` ${button.textContent} `;
-         console.log(userInput);
+         if (!input.includes("")) {
+            input[0] = calculate();
+            input[2] = "";
+            input[1] = button.textContent;
+         }
+         input[1] = button.textContent;
+         upperPanel.textContent = input[0] + " " + input[1] + " ";
+         console.log(input);
       })
    );
 }
