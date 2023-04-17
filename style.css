@@ -41,7 +41,7 @@ body {
    display: flex;
    flex-direction: column;
    height: 110px;
-   background-color: rgb(121, 186, 189);
+   background-color: rgb(112, 136, 137);
    border-radius: 5px;
    border: 2px solid black;
    font-family: "Pocket Calculator", sans-serif;
