@@ -110,15 +110,19 @@ body {
    border: 2px solid #000000;
    box-shadow: 3px 3px 2px 0px rgba(81, 80, 80, 0.51);
 }
+.button:hover {
+   transform: scale(1.05);
+   transition: all 0.005s;
+}
 
-.display-buttons > *:is(:hover) {
-   transition: all 0.05s;
+.display-buttons > *:active {
+   transition: all 0.005s;
    background-color: rgb(164, 121, 121);
    box-shadow: none;
 }
 
-.calculation-buttons > *:is(:hover) {
-   transition: all 0.05s;
+.calculation-buttons > *:active {
+   transition: all 0.005s;
    background-color: rgb(132, 132, 132);
    box-shadow: none;
 }
